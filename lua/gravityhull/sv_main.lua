@@ -1223,6 +1223,16 @@ xpcall(function()
 	if IsValid(ply) and MapRepeat then
 		if !ply.Cells then MapRepeat.SetCell(ply,"0 0 0") end
 		MapRepeat.SetCell(ent,ply.Cells[1])
+
+		local children = ent:GetChildren()
+		if(table.Count(children) > 0) then
+			for i=1,table.Count(children) do
+				if children[i]:IsValid() then
+					MapRepeat.SetCell(children[i],ply.Cells[1])
+				end
+			end
+		end
+
 	elseif MapRepeat and ent:IsWeapon() then
 		--print(ent)
 		MapRepeat.ClaimWep(ent)
